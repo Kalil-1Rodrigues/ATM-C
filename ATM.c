@@ -118,7 +118,7 @@ int main() {
                 break;
         }
 
-    } while (opcao != 0);
+    } while (opcao != 0); //mesma tecnica do valor inserido
 
     return 0;
 }
