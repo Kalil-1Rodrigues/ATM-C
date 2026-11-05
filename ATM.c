@@ -6,6 +6,9 @@ int main() {
     int valorOperacao;
     int notas100, notas50, notas20, notas10, notas5;
     int restante;
+    int mudou; // [C89] declarada aqui no topo (antes ficava no meio do bloco do saque)
+    int i;     // [C89] declarada aqui no topo (antes era "int i" dentro do for)
+    int ordemCiclica[] = {50, 20, 10, 5, 100};//Priorizamos entregar notas menores que apenas notas de 100
 
     do {
     	//fase inicial
@@ -19,7 +22,7 @@ int main() {
         printf("0 - Encerrar\n");
         printf("Escolha uma opcao: ");
 
-        if (scanf("%d", &opcao) != 1) { // Confere se o valor inserido pelo usuário é um int
+        if (scanf("%d", &opcao) != 1) { // Confere se o valor inserido pelo usuÃ¡rio Ã© um int
             printf("\nErro: Entrada invalida. Encerrando programa.\n");
             break;
         }
@@ -27,7 +30,7 @@ int main() {
         switch (opcao) {
             case 1: // Operacao de Saque (MODO BALANCEADO)
                 printf("\nDigite o valor do saque: ");
-                if (scanf("%d", &valorOperacao) != 1) {// Confere se o valor inserido pelo usuário é um int
+                if (scanf("%d", &valorOperacao) != 1) {// Confere se o valor inserido pelo usuÃ¡rio Ã© um int
                     printf("Erro: Valor invalido.\n");
                     break;
                 }
@@ -47,7 +50,7 @@ int main() {
                     // DISTRIBUICAO BALANCEADA (HOMOGENEA / COM TROCO)
                     // =========================================================
                     notas100 = notas50 = notas20 = notas10 = notas5 = 0; //Zera os contadores das notas por cada saque
-                    restante = valorOperacao; //Atribuimos o "valor da operação" para "restante" para podermos calcular as notas que serão entregues
+                    restante = valorOperacao; //Atribuimos o "valor da operaÃ§Ã£o" para "restante" para podermos calcular as notas que serÃ£o entregues
 
                     // Passo 1: Garante 1 nota de cada para cada R$ 185
                     //Utilizamos o 185 por ser a soma de todas as notas disponiveis
@@ -61,13 +64,12 @@ int main() {
                     }
 
                     // Passo 2: Distribuir ciclicamente
-                    //variavel "mudou" é booleana
+                    //variavel "mudou" Ã© booleana
                     
-                    int mudou = 1; //Caso o valor da operação seja menor que 185 ou o resto seja menor, entra nesse loop
-                    int ordemCiclica[] = {50, 20, 10, 5, 100};//Priorizamos entregar notas menores que apenas notas de 100
+                    mudou = 1; //Caso o valor da operaÃ§Ã£o seja menor que 185 ou o resto seja menor, entra nesse loop
                     while (mudou && restante > 0) {
                         mudou = 0;
-                        for (int i = 0; i < 5; i++) {
+                        for (i = 0; i < 5; i++) {
                             if (restante >= ordemCiclica[i]) {
                                 if (ordemCiclica[i] == 100)      notas100++;
                                 else if (ordemCiclica[i] == 50)  notas50++;
@@ -77,7 +79,7 @@ int main() {
 
                                 restante -= ordemCiclica[i];
                                 mudou = 1;
-                            } //Loop de entrega de notas até zerar o valor da operação
+                            } //Loop de entrega de notas atÃ© zerar o valor da operaÃ§Ã£o
                         }
                     }
 
@@ -93,7 +95,7 @@ int main() {
 
             case 2: // OPERACAO DE DEPOSITO
                 printf("\nDigite o valor do deposito: ");
-                if (scanf("%d", &valorOperacao) != 1) {//Confere se o valor inserido pelo usuário é um int
+                if (scanf("%d", &valorOperacao) != 1) {//Confere se o valor inserido pelo usuÃ¡rio Ã© um int
                     printf("Erro: Valor invalido.\n");
                     break;
                 }
@@ -118,13 +120,7 @@ int main() {
                 break;
         }
 
-    } while (opcao != 0); //mesma tecnica do valor inserido
+    } while (opcao != 0);
 
     return 0;
 }
-
-
-
-
-
-
